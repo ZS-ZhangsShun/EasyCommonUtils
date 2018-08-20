@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 import com.zs.easy.common.interfaces.DialogInterface;
 import com.zs.easy.common.interfaces.DialogRadioInterface;
 

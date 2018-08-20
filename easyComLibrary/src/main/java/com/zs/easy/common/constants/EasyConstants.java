@@ -10,7 +10,7 @@ public class EasyConstants {
     /**
      * 日志输入的tag
      */
-    public static final String TAG = "EasyLog";
+    public static String TAG = "EasyLog";
 
     /** 保存文件的主目录 */
     public static final String FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/easyfile/";

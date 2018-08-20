@@ -25,7 +25,7 @@ public class ToastUtil {
     }
 
     /**
-     * 弹出四达自定义封装的时间较长的吐司
+     * 弹出自定义封装的时间较长的吐司
      *
      * @param content
      */
@@ -43,7 +43,7 @@ public class ToastUtil {
     }
 
     /**
-     * 弹出四达自定义的时间较短的吐司
+     * 弹出自定义的时间较短的吐司
      *
      * @param content
      */

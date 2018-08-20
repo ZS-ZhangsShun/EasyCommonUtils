@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 import com.zs.easy.common.constants.EasyConstants;
 import com.zs.easy.common.constants.EasyVariable;
 
