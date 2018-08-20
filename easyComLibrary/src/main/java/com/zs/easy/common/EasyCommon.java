@@ -3,6 +3,7 @@ package com.zs.easy.common;
 import android.content.Context;
 
 import com.zs.easy.common.constants.EasyVariable;
+import com.zs.easy.common.handler.MainUIHandler;
 import com.zs.easy.common.utils.LogUtil;
 import com.zs.easy.common.utils.ToastUtil;
 
@@ -29,5 +30,17 @@ public class EasyCommon {
             ToastUtil.init(context);
             hasInit = true;
         }
+        EasyVariable.threadPoolUtil.poolExecute(new Runnable() {
+            @Override
+            public void run() {
+                //要执行的任务
+                MainUIHandler.handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //此处代码会在主线程执行
+                    }
+                });
+            }
+        });
     }
 }
