@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/adaptation_100px"
+    android:background="@drawable/dialog_bj_shape"
+    android:minWidth="@dimen/adaptation_220px"
+    android:paddingLeft="@dimen/adaptation_60px"
+    android:paddingRight="@dimen/adaptation_60px">
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress"
+        android:layout_centerVertical="true"
+        android:text="@string/dialog_progess_textview_text"
+        android:textColor="@color/dialog_pressed_normal"
+        android:textSize="@dimen/adaptation_24px" />
+
+    <TextView
+        android:id="@+id/content2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress"
+        android:layout_centerVertical="true"
+        android:text="@string/dialog_progess_textview_text"
+        android:textColor="@color/dialog_pressed_normal"
+        android:textSize="@dimen/adaptation_24px"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

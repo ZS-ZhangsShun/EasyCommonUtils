@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_info_shape"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_title_marginleft"
+        android:layout_marginTop="@dimen/dialog_title_margintop"
+        android:layout_marginRight="@dimen/dialog_title_marginright"
+        android:layout_marginBottom="@dimen/dialog_title_marginbottom"
+        android:text="@string/dialog_info_version_info_title"
+        android:textColor="@color/dialog_title_color"
+        android:textSize="@dimen/dialog_title_textsize" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_divider_height"
+        android:background="@color/dialog_title_color" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription=""
+        android:paddingBottom="@dimen/dialog_more_line_radiogroup_paddigbottom"
+        android:paddingTop="@dimen/dialog_more_line_radiogroup_paddigtop" >
+
+        <RadioButton
+            android:id="@+id/radio_first"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:drawableRight="@drawable/checked"
+            android:background="@drawable/dialog_radio_selector"
+            android:paddingLeft="@dimen/dialog_more_line_radio_paddigleft"
+            android:paddingTop="@dimen/dialog_more_line_radio_paddigtop"
+            android:paddingRight="@dimen/dialog_more_line_radio_paddigright"
+            android:paddingBottom="@dimen/dialog_more_line_radio_paddigbottom"
+            android:textColor="@color/dialog_content_color"
+            android:textSize="@dimen/dialog_more_line_radio_textsize" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/radio_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="@drawable/check_out"
+            android:paddingLeft="@dimen/dialog_more_line_radio_paddigleft"
+            android:paddingTop="@dimen/dialog_more_line_radio_paddigtop"
+            android:paddingRight="@dimen/dialog_more_line_radio_paddigright"
+            android:paddingBottom="@dimen/dialog_more_line_radio_paddigbottom"
+            android:background="@drawable/dialog_radio_selector"
+            android:textColor="@color/dialog_content_color"
+            android:textSize="@dimen/dialog_more_line_radio_textsize" >
+        </RadioButton>
+    </RadioGroup>
+
+</LinearLayout>

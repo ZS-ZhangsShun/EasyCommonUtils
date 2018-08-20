@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/toast_text"
+        android:textSize="@dimen/star_toast_textsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/star_toast_text_padding_left_right"
+        android:paddingRight="@dimen/star_toast_text_padding_left_right"
+        android:paddingBottom="@dimen/star_toast_text_padding_top_bottom"
+        android:paddingTop="@dimen/star_toast_text_padding_top_bottom"
+        android:background="@drawable/toast_background_shape"
+        android:textColor="@android:color/white" />
+</LinearLayout>

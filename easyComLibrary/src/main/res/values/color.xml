@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 自定义弹出框相关颜色 -->
+    <color name="dialog_title_color">#00b2ff</color>
+    <color name="dialog_content_color">#3C3A3A</color>
+    <color name="dialog_light_line_color">#d8f3ff</color>
+    <color name="dialog_pressed">#f2f3f1</color>
+    <color name="dialog_pressed_normal">#ffffff</color>
+    <color name="dialog_list_cancel">#cc0000</color>
+
+</resources>

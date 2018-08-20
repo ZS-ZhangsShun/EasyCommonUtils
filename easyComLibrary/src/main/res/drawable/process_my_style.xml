@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!-- <animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/progress_style_round"
+    android:pivotX="50%"
+    android:pivotY="50%"
+ /> -->
+<animation-list  
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:oneshot="false">  
+    <item android:drawable="@drawable/progress_style_round1" android:duration="200"/>  
+    <item android:drawable="@drawable/progress_style_round2" android:duration="200"/>  
+    <item android:drawable="@drawable/progress_style_round3" android:duration="200"/>  
+    <item android:drawable="@drawable/progress_style_round4" android:duration="200"/>  
+    <item android:drawable="@drawable/progress_style_round5" android:duration="200"/>  
+    <item android:drawable="@drawable/progress_style_round6" android:duration="200"/>  
+</animation-list>  

@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/dialog_light_line_color" android:state_checked="true" android:state_enabled="true"/>
+    <item android:drawable="@color/dialog_pressed_normal" android:state_checked="false" android:state_enabled="true"/>
+
+</selector>

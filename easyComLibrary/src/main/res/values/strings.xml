@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">EasyCommonApplication</string>
+    <!-- 通用字符串 -->
+    <string name="network_receiver">NetworkConnection</string>
+
+    <!-- 自定义弹出框相关字符串 -->
+    <string name="dialog_info_version_info_title">Version</string>
+    <string name="dialog_info_update">Update</string>
+    <string name="dialog_info_no_update">Cancel</string>
+
+    <!-- 带标题的弹框 -->
+    <string name="dialog_content_defaulttext">Exit?</string>
+    <string name="dialog_leftbtn_text">Cancel</string>
+    <string name="dialog_rightbtn_text">OK</string>
+
+    <!-- 不带标题的弹框 -->
+    <string name="dialog_new_info_leftbtn_text">Cancel</string>
+    <string name="dialog_new_info_rightbtn_text">OK</string>
+    <!-- 转圈的等待弹框，对应布局dialog_progess.xml -->
+    <string name="dialog_progess_textview_text">Please wait...</string>
+
+    <string name="program_exception">Error occured,application is forced to exit</string>
+
+    <string name="month_1">Jan</string>
+    <string name="month_2">Feb</string>
+    <string name="month_3">Mar</string>
+    <string name="month_4">Apr</string>
+    <string name="month_5">May</string>
+    <string name="month_6">Jun</string>
+    <string name="month_7">Jul</string>
+    <string name="month_8">Aug</string>
+    <string name="month_9">Sep</string>
+    <string name="month_10">Oct</string>
+    <string name="month_11">Nov</string>
+    <string name="month_12">Dec</string>
+
+
+    <string name="week_1">MON</string>
+    <string name="week_2">TUE</string>
+    <string name="week_3">WED</string>
+    <string name="week_4">THU</string>
+    <string name="week_5">FRI</string>
+    <string name="week_6">SAT</string>
+    <string name="week_7">SUN</string>
+
+
+    <!-- 有线连接时的名字 -->
+    <string name="ethernet_connected_off">Ethernet disconnected</string>
+    <string name="ethernet_no_connect">No ethernet connection</string>
+    <string name="ethernet_can_not_connect">Ethernet cannot be connected, please check the cable connection</string>
+    <string name="ethernet_connect_unknown_error">Unknown Network Error</string>
+    <string name="ethernet_connected_name">Ethernet Connected</string>
+
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_info_shape"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_title_marginleft"
+        android:layout_marginTop="@dimen/dialog_title_margintop"
+        android:layout_marginRight="@dimen/dialog_title_marginright"
+        android:layout_marginBottom="@dimen/dialog_title_marginbottom"
+        android:text="@string/dialog_info_version_info_title"
+        android:textColor="@color/dialog_title_color"
+        android:textSize="@dimen/dialog_title_textsize" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_divider_height"
+        android:background="@color/dialog_title_color" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_content_marginleft"
+        android:layout_marginTop="@dimen/dialog_content_margintop"
+        android:layout_marginRight="@dimen/dialog_content_marginright"
+        android:layout_marginBottom="@dimen/dialog_content_marginbottom"
+        android:text="@string/dialog_content_defaulttext"
+        android:textColor="@color/dialog_content_color"
+        android:textSize="@dimen/dialog_content_textsize" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_divider_height"
+        android:background="@color/dialog_light_line_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_buttonline_width"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_single_btn"
+            android:layout_width="@dimen/dialog_button_width"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_weight="1"
+            android:background="@drawable/btn_dialog_clicked"
+            android:gravity="center"
+            android:text="@string/dialog_rightbtn_text"
+            android:textColor="@color/dialog_title_color"
+            android:textSize="@dimen/dialog_button_textsize" />
+    </LinearLayout>
+
+</LinearLayout>
