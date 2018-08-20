@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 
 public class ListViewAdapter extends BaseAdapter {
 	private Context mContext;

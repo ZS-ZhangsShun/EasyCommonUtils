@@ -17,7 +17,7 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 
 public class CircleImageView extends ImageView {
 

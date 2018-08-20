@@ -5,8 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 
 /**
  * Created by zhangshun on 2017/10/30.

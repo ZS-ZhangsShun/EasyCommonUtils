@@ -2,7 +2,7 @@ package com.zs.easy.common.utils;
 
 import android.content.Context;
 
-import com.star.star_common.R;
+import com.zs.easy.common.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
