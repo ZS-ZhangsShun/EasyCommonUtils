@@ -33,7 +33,7 @@
 
     dependencies {
         ...
-        compile 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.0'
+        compile 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.1'
     }
 
 
