@@ -39,6 +39,11 @@ public class LogUtil {
 		log(LogPriority.ERROR, tag, msg, null);
 		writeLogToText(msg);
 	}
+
+	public static void e(String msg){
+		log(LogPriority.ERROR, EasyConstants.TAG, msg, null);
+		writeLogToText(msg);
+	}
 	
 	public static void e(String tag,String msg,Throwable tr){
 		log(LogPriority.ERROR, tag, msg, tr);
@@ -57,6 +62,11 @@ public class LogUtil {
 	
 	public static void i(String tag,String msg){
 		log(LogPriority.INFO, tag, msg, null);
+		writeLogToText(msg);
+	}
+
+	public static void i(String msg){
+		log(LogPriority.INFO, EasyConstants.TAG, msg, null);
 		writeLogToText(msg);
 	}
 	
