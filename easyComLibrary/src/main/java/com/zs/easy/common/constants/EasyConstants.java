@@ -11,6 +11,7 @@ public class EasyConstants {
      * 日志输入的tag
      */
     public static String TAG = "EasyLog";
+    public static boolean isShowToast = true;
 
     /** 保存文件的主目录 */
     public static final String FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/easyfile/";

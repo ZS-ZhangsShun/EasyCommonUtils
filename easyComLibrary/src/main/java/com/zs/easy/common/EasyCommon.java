@@ -2,6 +2,7 @@ package com.zs.easy.common;
 
 import android.content.Context;
 
+import com.zs.easy.common.constants.EasyConstants;
 import com.zs.easy.common.constants.EasyVariable;
 import com.zs.easy.common.handler.MainUIHandler;
 import com.zs.easy.common.utils.LogUtil;
@@ -16,14 +17,15 @@ public class EasyCommon {
 
     /**
      * 初始化common组件
+     *
      * @param context
      * @param spTag
      * @param isPrintLog
      */
-    public static void init(Context context, String spTag , boolean isPrintLog){
-        if (!hasInit){
+    public static void init(Context context, String spTag, boolean isPrintLog) {
+        if (!hasInit) {
             //核心变量的初始化
-            EasyVariable.initCoreVariable(context,spTag);
+            EasyVariable.initCoreVariable(context, spTag);
             //日志打印功能的开启
             LogUtil.init(isPrintLog);
             //吐丝的初始化

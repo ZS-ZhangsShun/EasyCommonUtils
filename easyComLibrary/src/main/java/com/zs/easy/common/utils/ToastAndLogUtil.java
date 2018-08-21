@@ -9,11 +9,13 @@ import com.zs.easy.common.handler.MainUIHandler;
 public class ToastAndLogUtil {
     public static void TL(final String content) {
         LogUtil.i(EasyConstants.TAG, content);
-        MainUIHandler.handler().post(new Runnable() {
-            @Override
-            public void run() {
-                ToastUtil.showShortToast(content);
-            }
-        });
+        if (EasyConstants.isShowToast) {
+            MainUIHandler.handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    ToastUtil.showShortToast(content);
+                }
+            });
+        }
     }
 }

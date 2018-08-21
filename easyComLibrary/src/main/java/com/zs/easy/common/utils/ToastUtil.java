@@ -3,6 +3,8 @@ package com.zs.easy.common.utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.zs.easy.common.constants.EasyConstants;
+
 public class ToastUtil {
 
     private static Context mContext;
@@ -21,7 +23,9 @@ public class ToastUtil {
      * @param content
      */
     public static void showLongToast(String content) {
-        Toast.makeText(mContext, content, Toast.LENGTH_LONG).show();
+        if (EasyConstants.isShowToast) {
+            Toast.makeText(mContext, content, Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
@@ -30,7 +34,9 @@ public class ToastUtil {
      * @param content
      */
     public static void showCustomerLongToast(String content) {
-        CustomerToastView.makeText(mContext, content, Toast.LENGTH_LONG).show();
+        if (EasyConstants.isShowToast) {
+            CustomerToastView.makeText(mContext, content, Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
@@ -39,7 +45,9 @@ public class ToastUtil {
      * @param content
      */
     public static void showShortToast(String content) {
-        Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+        if (EasyConstants.isShowToast) {
+            Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -48,6 +56,8 @@ public class ToastUtil {
      * @param content
      */
     public static void showCstomerShortToast(String content) {
-        CustomerToastView.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+        if (EasyConstants.isShowToast) {
+            CustomerToastView.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+        }
     }
 }
