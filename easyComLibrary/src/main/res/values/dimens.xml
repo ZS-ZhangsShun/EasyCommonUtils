@@ -53,7 +53,7 @@
     <dimen name="star_toast_text_padding_top_bottom">10px</dimen>
     <dimen name="star_toast_textsize">17sp</dimen>
 
-    <dimen name="adaptation_1px">0.50dp</dimen>
+ <!--   <dimen name="adaptation_1px">0.50dp</dimen>
     <dimen name="adaptation_2px">1.00dp</dimen>
     <dimen name="adaptation_3px">1.50dp</dimen>
     <dimen name="adaptation_4px">2.00dp</dimen>
@@ -1332,8 +1332,9 @@
     <dimen name="adaptation_1277px">638.50dp</dimen>
     <dimen name="adaptation_1278px">639.00dp</dimen>
     <dimen name="adaptation_1279px">639.50dp</dimen>
-    <dimen name="adaptation_1280px">640.00dp</dimen>
+    <dimen name="adaptation_1280px">640.00dp</dimen>-->
 
+    <!--切图按照1080p 标记后直接使用下面尺寸即可 比如macman标记是10 那么直接用a1080P_10px-->
     <dimen name="a1080P_1px">0.333dp</dimen>
     <dimen name="a1080P_2px">0.667dp</dimen>
     <dimen name="a1080P_3px">1.00dp</dimen>
