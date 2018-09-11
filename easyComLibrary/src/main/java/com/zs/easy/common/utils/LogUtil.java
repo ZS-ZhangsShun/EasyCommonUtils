@@ -4,12 +4,22 @@ import android.util.Log;
 
 import com.zs.easy.common.constants.EasyConstants;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class LogUtil {
+	private static SimpleDateFormat myLogSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 日志的输出格
+	private static SimpleDateFormat logfile = new SimpleDateFormat("yyyy-MM-dd");// 日志文件格式
+	private static String MYLOGFILEName = "log.txt";// 本类输出的日志文件名称
+
 	private static boolean logable;
 	private static int logLevel;
 
@@ -151,5 +161,48 @@ public class LogUtil {
 		} catch (Exception e) {
 			LogUtil.e(EasyConstants.TAG, "an error occured while writing log file...");
 		}
+	}
+
+	/**
+	 * 打开日志文件并写入日志
+	 *
+	 * @return
+	 **/
+	private static void writeLogtoFile(String tag, String text) {// 新建或打印到日志文件
+		Log.i(tag, text);
+		Date nowtime = new Date();
+		String needWriteFiel = logfile.format(nowtime);
+		String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+		// 取得日志存放目录
+		String path = getLogPath();
+		if (path != null && !"".equals(path)) {
+			try {
+				// 打开文件
+				File file = new File(path + File.separator + needWriteFiel + MYLOGFILEName);
+				FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+				BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+				bufWriter.write(needWriteMessage);
+				bufWriter.newLine();
+				bufWriter.close();
+				filerWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static String getLogPath() {
+		String path = "";
+		// 获取扩展SD卡设备状太
+		String sDStateString = android.os.Environment.getExternalStorageState();
+
+		// 拥有可读可写权限
+		if (sDStateString.equals(android.os.Environment.MEDIA_MOUNTED)) {
+			// 获取扩展存储设备的文件目录
+			File SDFile = android.os.Environment.getExternalStorageDirectory();
+			path = SDFile.getAbsolutePath();
+		}
+		return path;
 	}
 }
