@@ -145,7 +145,7 @@ public class LogUtil {
     }
 
     //将日志写到文件中
-    public static void writeLogToText(String log) {
+    private static void writeLogToText(String log) {
         try {
             /*if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				File dir = new File(StarConstants.FILE_PATH + "log");
@@ -169,7 +169,7 @@ public class LogUtil {
      *
      * @return
      **/
-    private static void writeLogtoFile(String tag, String text) {// 新建或打印到日志文件
+    public static void writeLogtoFile(String tag, String text) {// 新建或打印到日志文件
         Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
@@ -198,7 +198,7 @@ public class LogUtil {
      *
      * @return
      **/
-    private static void writeLogtoFile(String tag, String text, String fileName) {// 新建或打印到日志文件
+    public static void writeLogtoFile(String tag, String text, String fileName) {// 新建或打印到日志文件
         Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
