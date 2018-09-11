@@ -375,5 +375,4 @@ public class DateUtil {
         String string = df.format(date);
         return string;
     }
-
 }
