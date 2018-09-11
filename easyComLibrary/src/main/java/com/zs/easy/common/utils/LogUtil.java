@@ -170,6 +170,9 @@ public class LogUtil {
      * @return
      **/
     public static void writeLogtoFile(String tag, String text) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
         Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
@@ -199,6 +202,9 @@ public class LogUtil {
      * @return
      **/
     public static void writeLogtoFile(String tag, String text, String fileName) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
         Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
