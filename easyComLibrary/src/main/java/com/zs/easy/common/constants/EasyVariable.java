@@ -38,6 +38,23 @@ public class EasyVariable {
 		}
 	}
 
+	public static void initCoreVariable(Context context, String spTag,int spMode){
+		if (context != null){
+			EasyVariable.mContext = context;
+		}
+
+		if (spTag != null){
+			spCommon = mContext.getSharedPreferences(spTag, spMode);
+		}
+
+		if (threadPoolUtil == null) {
+			threadPoolUtil = new ThreadPoolUtil(10);
+		}
+		if (uiHandler == null) {
+			uiHandler = new UIHandler();
+		}
+	}
+
 	public void onDestroy() {
 		if (uiHandler != null) {
 			uiHandler = null;
