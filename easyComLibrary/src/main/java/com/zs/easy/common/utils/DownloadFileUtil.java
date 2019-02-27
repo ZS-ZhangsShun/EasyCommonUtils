@@ -43,8 +43,9 @@ public class DownloadFileUtil {
 		prefile.delete();
 		File file = creatNewFile(target);
 		if (file != null && file.exists() && file.isFile()) {
-			if (callBack != null)
+			if (callBack != null) {
 				callBack.onStart();
+			}
 			InputStream input = null;
 			FileOutputStream output = null;
 			HttpURLConnection conn = null;
@@ -73,15 +74,17 @@ public class DownloadFileUtil {
 						}
 						times ++;
 					}
-					if (callBack != null)
+					if (callBack != null) {
 						callBack.onSuccess(file);
+					}
 				}
 			} catch (Exception e) {
 				if(file.exists() && file.isFile()){
 					file.delete();
 				}
-				if (callBack != null)
+				if (callBack != null) {
 					callBack.onFailure(e);
+				}
 				Log.e(TAG, e.toString());
 			} finally {
 				if (conn != null) {
