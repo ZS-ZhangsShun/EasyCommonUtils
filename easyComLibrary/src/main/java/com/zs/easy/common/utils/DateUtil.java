@@ -140,8 +140,28 @@ public class DateUtil {
         return d;
     }
 
+    public static String convertTimestampToStringByPattern(long timestamp, String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern,
+                Locale.getDefault());
+        Long time = (long) timestamp;
+        Date date = new Date();
+        date.setTime(time);
+        String d = format.format(date);
+        return d;
+    }
+
     public static String convertTimestampToFullString(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                Locale.getDefault());
+        Long time = (long) timestamp;
+        Date date = new Date();
+        date.setTime(time);
+        String d = format.format(date);
+        return d;
+    }
+
+    public static String convertTimestampToHHmmssString(long timestamp) {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss",
                 Locale.getDefault());
         Long time = (long) timestamp;
         Date date = new Date();

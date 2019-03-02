@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_info_shape"
+    android:orientation="vertical" >
+
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/download_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_title_marginleft"
+        android:layout_marginTop="@dimen/dialog_title_margintop"
+        android:layout_marginRight="@dimen/dialog_title_marginright"
+        android:layout_marginBottom="@dimen/dialog_title_marginbottom"
+        android:text="软件更新"
+        android:textColor="@color/dialog_title_color"
+        android:textSize="@dimen/dialog_title_textsize" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_divider_height"
+        android:background="@color/dialog_title_color" />
+
+    <TextView
+        android:id="@+id/download_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_content_marginleft"
+        android:layout_marginTop="@dimen/dialog_content_margintop"
+        android:layout_marginRight="@dimen/dialog_content_marginright"
+        android:layout_marginBottom="@dimen/dialog_content_marginbottom"
+        android:text="程序下载中，请等待..."
+        android:textColor="@color/dialog_content_color"
+        android:textSize="@dimen/dialog_content_textsize" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/download_progressBar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar_color"
+        android:layout_height="3dp" />
+
+
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/download_percent_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0%"/>
+
+        <TextView
+            android:id="@+id/download_percent_total"
+            android:gravity="right"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0/100"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
