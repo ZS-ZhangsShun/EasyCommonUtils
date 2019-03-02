@@ -9,7 +9,8 @@ public class FileDownloadCallBackImpl implements IFileDownloadCallBack {
 	}
 
 	@Override
-	public void onLoading(long count, long current) {
+	public void onLoading(int progress, long count, long current) {
+
 	}
 
 	@Override
