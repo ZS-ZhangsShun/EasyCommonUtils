@@ -395,4 +395,72 @@ public class DateUtil {
         String string = df.format(date);
         return string;
     }
+
+    /**
+     * 根据毫秒数转化为时分秒   00:00:00
+     *
+     * @param ms
+     * @return
+     */
+    public static String getHHmmssTime(long ms) {
+        int hour = (int) (ms / (60 * 60 * 1000));
+        String hours = hour > 10 ? hour + "" : "0" + hour;
+
+        long lessMin = ms - 60 * 60 * 1000 * hour;
+        int min = (int) (lessMin / (60 * 1000));
+        String mins = min > 10 ? min + "" : "0" + min;
+
+        long lessSecond = lessMin - min * 60 * 1000;
+        int second = (int) (lessSecond / 1000);
+        String seconds = second > 10 ? second + "" : "0" + second;
+
+        return hours + ":" + mins + ":" + seconds;
+    }
+
+    /**
+     * 根据传入的 String格式的时间 "2019-03-03 10:30:25" 得到 与当前时间的差值
+     * 然后转换为 00:00:00 格式
+     *
+     * @return
+     */
+    public static String stringToLessForHHmmss(String dates) {
+        Date endTimeD = str2Date(dates);
+        long lessTimeL = endTimeD.getTime() - System.currentTimeMillis();
+        return getHHmmssTime(lessTimeL);
+    }
+
+    /**
+     * 判断当前系统时间是否在指定时间的范围内
+     *
+     * @param beginHour 开始小时，例如22
+     * @param beginMin  开始小时的分钟数，例如30
+     * @param endHour   结束小时，例如 8
+     * @param endMin    结束小时的分钟数，例如0
+     * @return true表示在范围内，否则false
+     */
+    public static boolean isCurrentInTimeScope(int beginHour, int beginMin, int beginSecond, int endHour, int endMin, int endSecond) {
+        boolean result = false;
+        final long currentTimeMillis = System.currentTimeMillis();
+        long beginTime, endTime;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(currentTimeMillis);
+        calendar.set(Calendar.HOUR_OF_DAY, beginHour);
+        calendar.set(Calendar.MINUTE, beginMin);
+        calendar.set(Calendar.SECOND, beginSecond);
+        beginTime = calendar.getTimeInMillis();
+
+        calendar.set(Calendar.HOUR_OF_DAY, endHour);
+        calendar.set(Calendar.MINUTE, endMin);
+        calendar.set(Calendar.SECOND, endSecond);
+        endTime = calendar.getTimeInMillis();
+
+        LogUtil.i("currentTimeMillis = " + currentTimeMillis);
+        LogUtil.i("beginTime = " + beginTime);
+        LogUtil.i("endTime = " + endTime);
+
+        // 普通情况(比如 8:00 - 14:00)
+        result = beginTime <= currentTimeMillis && currentTimeMillis <= endTime;
+        return result;
+    }
 }
