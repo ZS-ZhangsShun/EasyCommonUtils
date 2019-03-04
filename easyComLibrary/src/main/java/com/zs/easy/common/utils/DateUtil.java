@@ -404,15 +404,15 @@ public class DateUtil {
      */
     public static String getHHmmssTime(long ms) {
         int hour = (int) (ms / (60 * 60 * 1000));
-        String hours = hour > 10 ? hour + "" : "0" + hour;
+        String hours = hour >= 10 ? hour + "" : "0" + hour;
 
         long lessMin = ms - 60 * 60 * 1000 * hour;
         int min = (int) (lessMin / (60 * 1000));
-        String mins = min > 10 ? min + "" : "0" + min;
+        String mins = min >= 10 ? min + "" : "0" + min;
 
         long lessSecond = lessMin - min * 60 * 1000;
         int second = (int) (lessSecond / 1000);
-        String seconds = second > 10 ? second + "" : "0" + second;
+        String seconds = second >= 10 ? second + "" : "0" + second;
 
         return hours + ":" + mins + ":" + seconds;
     }
