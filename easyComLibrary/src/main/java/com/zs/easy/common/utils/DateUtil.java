@@ -426,6 +426,9 @@ public class DateUtil {
     public static String stringToLessForHHmmss(String dates) {
         Date endTimeD = str2Date(dates);
         long lessTimeL = endTimeD.getTime() - System.currentTimeMillis();
+        if (lessTimeL < 0) {
+            lessTimeL = -lessTimeL;
+        }
         return getHHmmssTime(lessTimeL);
     }
 
