@@ -24,19 +24,19 @@ public class EasyGestureListener {
                         mCurPosY = event.getY();
                         break;
                     case MotionEvent.ACTION_UP:
-                        if (mCurPosY - mPosY > 0 && (Math.abs(mCurPosY - mPosY) > 25)) {
+                        if (mCurPosY - mPosY > 0 && (Math.abs(mCurPosY - mPosY) > DensityUtil.dp2px(10))) {
                             if (easyGestureInterface != null) {
                                 easyGestureInterface.onDownSlide();
                             }
-                        } else if (mCurPosY - mPosY < 0 && (Math.abs(mCurPosY - mPosY) > 25)) {
+                        } else if (mCurPosY - mPosY < 0 && (Math.abs(mCurPosY - mPosY) > DensityUtil.dp2px(10))) {
                             if (easyGestureInterface != null) {
                                 easyGestureInterface.onUpSlide();
                             }
-                        } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
+                        } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX - mPosX) > DensityUtil.dp2px(10))) {
                             if (easyGestureInterface != null) {
                                 easyGestureInterface.onLeftSlide();
                             }
-                        } else if (mCurPosX - mPosX > 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
+                        } else if (mCurPosX - mPosX > 0 && (Math.abs(mCurPosX - mPosX) > DensityUtil.dp2px(10))) {
                             if (easyGestureInterface != null) {
                                 easyGestureInterface.onRightSlide();
                             }
