@@ -23,4 +23,12 @@ public class DensityUtil {
         int px = (int) (getDensity() * dp + 0.5);
         return px;
     }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dp(float pxValue) {
+        return (int) (pxValue / getDensity() + 0.5f);
+    }
+
 }
