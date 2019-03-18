@@ -1268,7 +1268,10 @@ public class ZSHttpsUtil {
     }
 
     public static void downLoadFile(final String url, final String saveDir, final IFileDownloadCallBack downloadCallBack) {
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Accept-Encoding", "identity")
+                .build();
         getOkHttpClient(null, mConnectTimeout, null).newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
