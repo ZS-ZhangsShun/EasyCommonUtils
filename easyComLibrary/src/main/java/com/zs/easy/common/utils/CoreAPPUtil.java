@@ -322,7 +322,7 @@ public class CoreAPPUtil {
     /**
      * 下载新版本
      */
-    protected static void downloadAPK(final Activity activity, final String downLoadUrl, final String saveDir) {
+    public static void downloadAPK(final Activity activity, final String downLoadUrl, final String saveDir) {
         final AlertDialog dialog = new AlertDialog.Builder(activity).create();
         dialog.show();
         View view = View.inflate(activity, R.layout.dialog_download_progress, null);
