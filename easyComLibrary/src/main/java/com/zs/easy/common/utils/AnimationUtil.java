@@ -1,5 +1,8 @@
 package com.zs.easy.common.utils;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.view.View;
@@ -173,5 +176,31 @@ public class AnimationUtil {
             }
         });
         return rotation;
+    }
+
+    /**
+     * 签到添加金币的动画
+     */
+    public static void startSignSuccessAnim(final View view, float formY, float toY) {
+        //设置控件的动画
+        AnimatorSet animatorSet = new AnimatorSet();
+        //缩放动画，X轴2倍缩小至0.9倍
+        animatorSet.play(translationY(view, formY, toY, 500, 0))
+                //缩放动画，Y轴2倍缩放至0.9倍
+                .with(scale(view, "scaleY", 2f, 0.9f, 500, 0))
+                //缩放动画，X轴0.9倍缩小至
+                .with(scale(view, "scaleX", 2f, 0.9f, 500, 0))
+                //透明动画，从1-0
+                .with(alpha(view, 1, 0, 500, 0));
+        //开始动画
+        animatorSet.start();
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                //当动画结束以后，需要把控件从父布局移除
+                view.setVisibility(View.GONE);
+            }
+        });
     }
 }
