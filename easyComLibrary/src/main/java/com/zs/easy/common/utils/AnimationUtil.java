@@ -1,8 +1,11 @@
 package com.zs.easy.common.utils;
 
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 
 /**
@@ -78,5 +81,97 @@ public class AnimationUtil {
             animation.cancel();
         }
         view.clearAnimation();
+    }
+
+    /**
+     * 缩放动画
+     *
+     * @param view
+     * @param propertyName
+     * @param from
+     * @param to
+     * @param time
+     * @param delayTime
+     * @return
+     */
+    public static ObjectAnimator scale(View view, String propertyName, float from, float to, long time, long delayTime) {
+        ObjectAnimator translation = ObjectAnimator.ofFloat(view
+                , propertyName
+                , from, to);
+        translation.setInterpolator(new LinearInterpolator());
+        translation.setStartDelay(delayTime);
+        translation.setDuration(time);
+        return translation;
+    }
+
+    /**
+     * 位移动画
+     *
+     * @param view
+     * @param from
+     * @param to
+     * @param time
+     * @param delayTime
+     * @return
+     */
+    public static ObjectAnimator translationX(View view, float from, float to, long time, long delayTime) {
+        ObjectAnimator translation = ObjectAnimator.ofFloat(view
+                , "translationX"
+                , from, to);
+        translation.setInterpolator(new LinearInterpolator());
+        translation.setStartDelay(delayTime);
+        translation.setDuration(time);
+        return translation;
+    }
+
+    public static ObjectAnimator translationY(View view, float from, float to, long time, long delayTime) {
+        ObjectAnimator translation = ObjectAnimator.ofFloat(view
+                , "translationY"
+                , from, to);
+        translation.setInterpolator(new LinearInterpolator());
+        translation.setStartDelay(delayTime);
+        translation.setDuration(time);
+        return translation;
+    }
+
+    /**
+     * 透明度动画
+     *
+     * @param view
+     * @param from
+     * @param to
+     * @param time
+     * @param delayTime
+     * @return
+     */
+    public static ObjectAnimator alpha(View view, float from, float to, long time, long delayTime) {
+        ObjectAnimator translation = ObjectAnimator.ofFloat(view
+                , "alpha"
+                , from, to);
+        translation.setInterpolator(new LinearInterpolator());
+        translation.setStartDelay(delayTime);
+        translation.setDuration(time);
+        return translation;
+    }
+
+    /**
+     * 旋转动画
+     * @param view
+     * @param time
+     * @param delayTime
+     * @param values
+     * @return
+     */
+    public static ObjectAnimator rotation(View view, long time, long delayTime, float... values) {
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(view, "rotation", values);
+        rotation.setDuration(time);
+        rotation.setStartDelay(delayTime);
+        rotation.setInterpolator(new TimeInterpolator() {
+            @Override
+            public float getInterpolation(float input) {
+                return input;
+            }
+        });
+        return rotation;
     }
 }
