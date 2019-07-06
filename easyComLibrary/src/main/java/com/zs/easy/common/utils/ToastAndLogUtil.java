@@ -13,6 +13,18 @@ public class ToastAndLogUtil {
             MainUIHandler.handler().post(new Runnable() {
                 @Override
                 public void run() {
+                    ToastUtil.showLongToast(content);
+                }
+            });
+        }
+    }
+
+    public static void TLShort(final String content) {
+        LogUtil.i(EasyConstants.TAG, content);
+        if (EasyConstants.isShowToast) {
+            MainUIHandler.handler().post(new Runnable() {
+                @Override
+                public void run() {
                     ToastUtil.showShortToast(content);
                 }
             });
