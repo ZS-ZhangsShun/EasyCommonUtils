@@ -14,7 +14,7 @@ import java.util.TimeZone;
 /**
  * 时区走系统设置
  *
- * @author liul
+ * @author zs
  */
 public class DateUtil {
 
@@ -106,11 +106,10 @@ public class DateUtil {
         return calendar.getTime();
     }
 
-    public static Date convertTimestampToDate(int timestamp) {
+    public static Date convertTimestampToDate(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
                 Locale.getDefault());
-        Long time = (long) timestamp;
-        String d = format.format(time * 1000);
+        String d = format.format(timestamp);
         Date date = null;
         try {
             date = format.parse(d);
@@ -120,7 +119,21 @@ public class DateUtil {
         return date;
     }
 
-    public static String convertTimestampToMinu(long timestamp) {
+    public static String convertStringLongTimeToStringDate(String timestamp) {
+        try {
+            Date date = convertTimestampToDate(Long.parseLong(timestamp));
+            return date2yyyyMMdd(date);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * @param timestamp
+     * @return mm:ss
+     */
+    public static String convertTimestampTommss(long timestamp) {
         int minutes = (int) (timestamp / anMinute);
         int seconds = (int) (timestamp / anSecond) % 60;
         String second;
@@ -143,9 +156,8 @@ public class DateUtil {
     public static String convertTimestampToStringByPattern(long timestamp, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern,
                 Locale.getDefault());
-        Long time = (long) timestamp;
         Date date = new Date();
-        date.setTime(time);
+        date.setTime(timestamp);
         String d = format.format(date);
         return d;
     }
@@ -153,9 +165,8 @@ public class DateUtil {
     public static String convertTimestampToFullString(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
                 Locale.getDefault());
-        Long time = (long) timestamp;
         Date date = new Date();
-        date.setTime(time);
+        date.setTime(timestamp);
         String d = format.format(date);
         return d;
     }
@@ -163,9 +174,8 @@ public class DateUtil {
     public static String convertTimestampToHHmmssString(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss",
                 Locale.getDefault());
-        Long time = (long) timestamp;
         Date date = new Date();
-        date.setTime(time);
+        date.setTime(timestamp);
         String d = format.format(date);
         return d;
     }
@@ -173,9 +183,8 @@ public class DateUtil {
     public static String convertTimestampToString(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm",
                 Locale.getDefault());
-        Long time = (long) timestamp;
         Date date = new Date();
-        date.setTime(time);
+        date.setTime(timestamp);
         String d = format.format(date);
         return d;
     }
@@ -196,13 +205,13 @@ public class DateUtil {
         return false;
     }
 
-    public static String data2Str(Date date) {
+    public static String data2HHmm(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm", Locale.getDefault());
         String string = df.format(date);
         return string;
     }
 
-    public static String data2MonthDayStr(Date date) {
+    public static String data2MonthMMdd(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("MM/dd", Locale.getDefault());
         String string = df.format(date);
         return string;
@@ -366,7 +375,7 @@ public class DateUtil {
      * @param date
      * @return yyyy.MM.dd格式
      */
-    public static String date2StrDay(Date date) {
+    public static String date2yyyyMMdd(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
         String string = df.format(date);
         return string;
@@ -400,7 +409,7 @@ public class DateUtil {
      * 根据毫秒数转化为时分秒   00:00:00
      *
      * @param ms
-     * @return
+     * @return HH:mm:ss
      */
     public static String getHHmmssTime(long ms) {
         int hour = (int) (ms / (60 * 60 * 1000));
