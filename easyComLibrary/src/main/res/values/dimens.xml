@@ -2,10 +2,10 @@
 
     <!-- 带标题的弹框,对应布局dialog_info.xml -->
     <dimen name="dialog_title_marginleft">20dp</dimen>
-    <dimen name="dialog_title_margintop">15dp</dimen>
+    <dimen name="dialog_title_margintop">10dp</dimen>
     <dimen name="dialog_title_marginright">20dp</dimen>
-    <dimen name="dialog_title_marginbottom">15dp</dimen>
-    <dimen name="dialog_title_textsize">19sp</dimen>
+    <dimen name="dialog_title_marginbottom">10dp</dimen>
+    <dimen name="dialog_title_textsize">18sp</dimen>
     <dimen name="dialog_divider_height">1dp</dimen>
     <dimen name="dialog_divider_width">2dp</dimen>
     <dimen name="dialog_content_marginleft">20dp</dimen>
