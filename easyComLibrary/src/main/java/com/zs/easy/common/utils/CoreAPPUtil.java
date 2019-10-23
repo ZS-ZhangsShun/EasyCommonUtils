@@ -14,8 +14,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -334,6 +337,15 @@ public class CoreAPPUtil {
 
         Window window = dialog.getWindow();
         window.setContentView(view);
+        //解决不居中显示的问题
+        WindowManager m = activity.getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        // 设置宽度
+        p.width = (int) (d.getWidth() * 0.95); // 宽度设置为屏幕的0.95
+        p.gravity = Gravity.CENTER;//设置位置
+        //p.alpha = 0.8f;//设置透明度
+        window.setAttributes(p);
 
         final String downLoadUrl2 = "http://122.70.142.80/app.znds.com/down/20190201/dsj3_3.2.1_dangbei.apk";
         EasyVariable.threadPoolUtil.poolExecute(new Runnable() {
