@@ -395,6 +395,7 @@ public class CoreAPPUtil {
                         MainUIHandler.handler().post(new Runnable() {
                             @Override
                             public void run() {
+                                dialog.dismiss();
                                 ToastAndLogUtil.TL("下载失败");
                                 LogUtil.e("下载失败 " + e.toString());
 //                        dialog.dismiss();
