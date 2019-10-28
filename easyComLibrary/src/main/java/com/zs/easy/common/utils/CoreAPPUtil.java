@@ -325,15 +325,15 @@ public class CoreAPPUtil {
     /**
      * 下载新版本
      */
-    public void downloadAPK(final Activity activity, final String downLoadUrl, final String saveDir) {
+    public void downloadAPK(final Activity activity, final String downLoadUrl, final String saveDir, final boolean canCancel, final boolean dismissWhenInstall, final String tipWhenDownFinish) {
         final AlertDialog dialog = new AlertDialog.Builder(activity).create();
         dialog.show();
         View view = View.inflate(activity, R.layout.dialog_download_progress, null);
-        final ProgressBar progressBar = view.findViewById(R.id.download_progressBar);
-        final TextView percentTv = view.findViewById(R.id.download_percent_tv);
-        final TextView percentTotalTv = view.findViewById(R.id.download_percent_total);
-        final TextView content = view.findViewById(R.id.download_content);
-        dialog.setCancelable(false);
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.download_progressBar);
+        final TextView percentTv = (TextView) view.findViewById(R.id.download_percent_tv);
+        final TextView percentTotalTv = (TextView) view.findViewById(R.id.download_percent_total);
+        final TextView content = (TextView) view.findViewById(R.id.download_content);
+        dialog.setCancelable(canCancel);
 
         Window window = dialog.getWindow();
         window.setContentView(view);
@@ -374,13 +374,18 @@ public class CoreAPPUtil {
 
                     @Override
                     public void onSuccess(File file) {
-                        MainUIHandler.handler().post(new Runnable() {
-                            @Override
-                            public void run() {
-                                content.setText("下载完成！");
-                            }
-                        });
+                        if (tipWhenDownFinish != null && !tipWhenDownFinish.equals("")) {
+                            MainUIHandler.handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    content.setText(tipWhenDownFinish);
+                                }
+                            });
+                        }
 
+                        if (dismissWhenInstall) {
+                            dialog.dismiss();
+                        }
                         //安装应用程序
                         CoreAPPUtil.getUtilInstance(activity).installApk(file, APPUtil.getPackageName(EasyVariable.mContext));
                     }
