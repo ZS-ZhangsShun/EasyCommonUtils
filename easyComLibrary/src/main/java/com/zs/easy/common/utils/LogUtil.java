@@ -248,9 +248,6 @@ public class LogUtil {
             try {
                 // 打开文件
                 File file = new File(path + File.separator + fileName);
-                if (!file.exists()) {
-                    file.mkdir();
-                }
                 FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                 BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                 bufWriter.write(needWriteMessage);
