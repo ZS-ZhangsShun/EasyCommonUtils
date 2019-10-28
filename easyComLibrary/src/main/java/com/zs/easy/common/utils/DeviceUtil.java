@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.telephony.TelephonyManager;
 
 import com.zs.easy.common.constants.EasyVariable;
@@ -35,6 +36,25 @@ public class DeviceUtil {
                 || ((TelephonyManager) EasyVariable.mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .getNetworkOperatorName().toLowerCase().equals("android")
                 || !canResolveIntent;
+    }
+
+
+    /**
+     * 获取app缓存路径
+     * @param context
+     * @return
+     */
+    public static String getCachePath( Context context ){
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            //外部存储可用
+            cachePath = context.getExternalCacheDir().getPath() ;
+        }else {
+            //外部存储不可用
+            cachePath = context.getCacheDir().getPath() ;
+        }
+        return cachePath ;
     }
 
 }
