@@ -40,6 +40,26 @@ public class InstantTimeUtil {
         }
     }
 
+    public static String convertTimestampToStringByPattern(long timestamp, String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        format.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        Long time = Long.valueOf(timestamp);
+        Date date = new Date();
+        date.setTime(time.longValue());
+        String d = format.format(date);
+        return d;
+    }
+
+    public static String convertTimestampToStringByPatternAndZone(long timestamp, String pattern, String zone) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        format.setTimeZone(TimeZone.getTimeZone(zone));
+        Long time = Long.valueOf(timestamp);
+        Date date = new Date();
+        date.setTime(time.longValue());
+        String d = format.format(date);
+        return d;
+    }
+
     public static String convertTimestampToString(long timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("GMT+08"));
