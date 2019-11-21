@@ -174,7 +174,6 @@ public class LogUtil {
         if (!logable) {
             return;
         }
-        Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
         String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
@@ -203,6 +202,36 @@ public class LogUtil {
      * @return
      **/
     public static void writeLogtoFile(String tag, String text, String fileName) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
+        Date nowtime = new Date();
+        String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+        // 取得日志存放目录
+        String path = getLogPath();
+        if (path != null && !"".equals(path)) {
+            try {
+                // 打开文件
+                File file = new File(path + File.separator + fileName);
+                FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                bufWriter.write(needWriteMessage);
+                bufWriter.newLine();
+                bufWriter.close();
+                filerWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 打开日志文件并写入日志 自定义文件名 默认在sd卡根目录
+     *
+     * @return
+     **/
+    public static void printAndWriteLogtoFile(String tag, String text, String fileName) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
@@ -238,6 +267,37 @@ public class LogUtil {
         if (!logable) {
             return;
         }
+        Date nowtime = new Date();
+        String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+        // 取得日志存放目录
+        String path = DeviceUtil.getCachePath(EasyVariable.mContext);
+        if (path != null && !"".equals(path)) {
+            try {
+                // 打开文件
+                File file = new File(path + File.separator + fileName);
+                FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                bufWriter.write(needWriteMessage);
+                bufWriter.newLine();
+                bufWriter.close();
+                filerWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 打开日志文件并写入日志 自定义文件名 存在Android data 包名 Cache下面
+     * 如果sd卡不可用就存在 data  data  包名  Cache下面
+     *
+     * @return
+     **/
+    public static void printAndWriteLogtoCache(String tag, String text, String fileName) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
         Log.i(tag, text);
         Date nowtime = new Date();
         String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
@@ -266,6 +326,33 @@ public class LogUtil {
      * @return
      **/
     public static void writeLogtoFile(String tag, String text, File file) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
+        Date nowtime = new Date();
+        String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+        if (file != null && file.exists()) {
+            try {
+                // 打开文件
+                FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                bufWriter.write(needWriteMessage);
+                bufWriter.newLine();
+                bufWriter.close();
+                filerWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 打开日志文件并写入日志 自定义文件 带日志的
+     *
+     * @return
+     **/
+    public static void printAndWriteLogtoFile(String tag, String text, File file) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
