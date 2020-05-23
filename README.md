@@ -33,7 +33,7 @@
 
     dependencies {
         ...
-        implementation 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.6.4'
+        implementation 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.6.5'
     }
 
 
