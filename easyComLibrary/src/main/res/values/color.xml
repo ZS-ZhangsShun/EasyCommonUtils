@@ -8,5 +8,6 @@
     <color name="dialog_pressed">#f2f3f1</color>
     <color name="dialog_pressed_normal">#ffffff</color>
     <color name="dialog_list_cancel">#cc0000</color>
+    <color name="common_gray_line_color">#ababab</color>
 
 </resources>
