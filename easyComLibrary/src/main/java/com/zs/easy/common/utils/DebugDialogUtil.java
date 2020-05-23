@@ -75,8 +75,8 @@ public class DebugDialogUtil {
      */
     public void addDebugData(String content) {
         String text = tv.getText().toString();
-        if (text.length() > 900) {
-            text = text.substring(text.length() - 900);
+        if (text.length() > 1000) {
+            text = text.substring(text.length() - 1000);
         }
         text += "\n";
         text += convertTimestampToString() + " " + content;
@@ -95,14 +95,14 @@ public class DebugDialogUtil {
     }
 
     private String getFixedContent() {
-        String fixedContent = "\n" + "\n"
-                + "================================================="
+        String fixedContent = "\n"
+                + "===================================="
                 + "\n"
                 + "App log path： " + LogUtil.getDefaultLogPath() + File.separator + LogUtil.getDefaultFileName()
                 + "\n"
                 + "versionName ： " + CoreAPPUtil.getUtilInstance(EasyVariable.mContext).getVersionName() + "  ---  versionCode: " + CoreAPPUtil.getUtilInstance(EasyVariable.mContext).getVersionName()
                 + "\n"
-                + "================================================";
+                + "====================================";
         return fixedContent;
 
     }
