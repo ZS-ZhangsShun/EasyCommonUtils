@@ -239,7 +239,9 @@ public class LogUtil {
                 if (path != null && !"".equals(path)) {
                     try {
                         // 打开文件
-                        File file = new File(path + File.separator + needWriteFiel + MYLOGFILEName);
+                        String pathName = path + File.separator + needWriteFiel + MYLOGFILEName;
+                        deleteSomeLog(pathName);
+                        File file = new File(pathName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -275,6 +277,7 @@ public class LogUtil {
                 String path = getSDCardPath();
                 if (path != null && !"".equals(path)) {
                     try {
+                        deleteSomeLog(path + File.separator + fileName);
                         // 打开文件
                         File file = new File(path + File.separator + fileName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
@@ -313,8 +316,10 @@ public class LogUtil {
                 String path = getCachePath(EasyVariable.mContext);
                 if (path != null && !"".equals(path)) {
                     try {
+                        String pathName = path + File.separator + fileName;
+                        deleteSomeLog(pathName);
                         // 打开文件
-                        File file = new File(path + File.separator + fileName);
+                        File file = new File(pathName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -558,8 +563,10 @@ public class LogUtil {
                 String path = DeviceUtil.getCachePath(EasyVariable.mContext);
                 if (path != null && !"".equals(path)) {
                     try {
+                        String pathName = path + File.separator + fileName;
+                        deleteSomeLog(pathName);
                         // 打开文件
-                        File file = new File(path + File.separator + fileName);
+                        File file = new File(pathName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -595,8 +602,10 @@ public class LogUtil {
                 String path = getSDCardPath();
                 if (path != null && !"".equals(path)) {
                     try {
+                        String pathName = path + File.separator + fileName;
+                        deleteSomeLog(pathName);
                         // 打开文件
-                        File file = new File(path + File.separator + fileName);
+                        File file = new File(pathName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -654,7 +663,7 @@ public class LogUtil {
                     br.close();
                     //第二步把list中的日志内容安装保存比例 写入到一个新文件里面
                     String fileSeparator = File.separator;
-                    File tempFile = new File(fileName.substring(0, fileName.lastIndexOf(fileSeparator) + 1) + "starTempLog.txt");
+                    File tempFile = new File(fileName.substring(0, fileName.lastIndexOf(fileSeparator) + 1) + "easyTempLog.txt");
                     FileOutputStream fileOutputStream = new FileOutputStream(tempFile); //定义一个   
                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
                     BufferedWriter bw = new BufferedWriter(outputStreamWriter);

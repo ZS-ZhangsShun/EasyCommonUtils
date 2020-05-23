@@ -6,4 +6,9 @@
         <item>TV</item>        
     </string-array>
 
+    <string-array name="sping_contentType">
+        <item>application/x-www-form-urlencoded</item>
+        <item>application/json</item>
+        <item>multipart/form-data</item>
+    </string-array>
 </resources>

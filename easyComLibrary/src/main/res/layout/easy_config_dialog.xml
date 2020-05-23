@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/config_pwd_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:visibility="gone">
+
+        <EditText
+            android:id="@+id/config_pwd_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/gsinfo_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="配置页面"
+        android:textSize="18dp" />
+
+    <include
+        layout="@layout/easy_common_gray_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/common_config_shiyan_ll"
+                style="@style/common_config_ll">
+
+                <TextView
+                    style="@style/common_config_tv"
+                    android:layout_marginLeft="10dp"
+                    android:text="实验模式" />
+
+                <Switch
+                    android:id="@+id/common_config_switch"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/common_config_ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    style="@style/common_config_ll"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="请求地址" />
+
+                    <EditText
+                        android:id="@+id/common_config_server_url_et"
+                        style="@style/common_config_et" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/common_config_ll"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="本地模式" />
+
+                    <Switch
+                        android:id="@+id/common_config_local_data_switch"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/common_config_ll">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="日志提示" />
+
+                    <Switch
+                        android:id="@+id/common_config_show_toast_switch"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    style="@style/common_config_ll">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="日志保存" />
+
+                    <Switch
+                        android:id="@+id/common_config_save_log_switch"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/common_config_ll">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="打开调试" />
+
+                    <Switch
+                        android:id="@+id/common_open_debug_switch"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/common_config_ll"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/common_config_tv"
+                        android:text="Http" />
+
+                    <Spinner
+                        android:id="@+id/common_config_content_type_spinner"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/sping_contentType" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/common_config_clear_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="100dp"
+                    android:text="清除数据" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="当前sdk版本：1.0.14" />
+
+    <include
+        layout="@layout/easy_common_gray_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/common_config_cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消"
+            android:textSize="18dp" />
+
+        <include
+            layout="@layout/easy_common_gray_line"
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/common_config_confim_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="保存"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/easy_common_gray_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="45dp" />
+</LinearLayout>
