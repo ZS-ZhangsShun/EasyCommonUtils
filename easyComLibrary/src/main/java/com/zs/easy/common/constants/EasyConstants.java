@@ -8,6 +8,7 @@ import android.os.Environment;
 
 public class EasyConstants {
     public static final String SP_GRAY_STYLE = "SP_GRAY_STYLE";
+    public static String PWD = "zs123";
     /**
      * 日志输入的tag
      */

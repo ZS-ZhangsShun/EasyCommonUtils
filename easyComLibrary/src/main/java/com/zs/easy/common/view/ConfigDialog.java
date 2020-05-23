@@ -105,7 +105,7 @@ public class ConfigDialog extends BaseDialog implements View.OnClickListener, Co
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (config_pwd_et.getText().toString().equals("star")) {
+                if (config_pwd_et.getText().toString().equals(EasyConstants.PWD)) {
                     config_pwd_ll.setVisibility(View.GONE);
                     config_pwd_et.setText("");
                 }

@@ -2,6 +2,7 @@ package com.zs.easy.common.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,14 @@ public class DebugDialogUtil {
 
         View view = View.inflate(context, R.layout.debug_info_item, null);
         tv = view.findViewById(R.id.debug_dialog_content);
+        //支持垂直滚动
+        tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConfigUtil.getInstence().multyClickToHideDebugDialog(dialog);
+            }
+        });
 
         tv.setText(getFixedContent());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(600, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -58,7 +67,7 @@ public class DebugDialogUtil {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        dialog.getWindow().setGravity(Gravity.RIGHT);
+        dialog.getWindow().setGravity(Gravity.LEFT);
         dialog.show();
     }
 
@@ -75,12 +84,17 @@ public class DebugDialogUtil {
      */
     public void addDebugData(String content) {
         String text = tv.getText().toString();
-        if (text.length() > 1000) {
-            text = text.substring(text.length() - 1000);
+        if (text.length() > 1500) {
+            text = text.substring(text.length() - 1500);
         }
         text += "\n";
         text += convertTimestampToString() + " " + content;
         tv.setText(text);
+        int offset = tv.getLineCount() * tv.getLineHeight();
+        if (offset > tv.getHeight()) {
+            tv.scrollTo(0, offset - tv.getHeight());
+        }
+//        tv.scrollTo(0, tv.getHeight() / 2);
     }
 
     /**
