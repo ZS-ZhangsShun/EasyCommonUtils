@@ -1,10 +1,17 @@
 package com.zs.easy.common.utils;
 
+import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.zs.easy.common.constants.EasyConstants;
+import com.zs.easy.common.constants.EasyVariable;
 
 /**
  * Created by zhangshun on 2018/1/27.
@@ -31,5 +38,36 @@ public class StyleUtil {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    /**
+     * 设置黑白风格 取消黑白风格 -- 设置颜色矩阵的饱和度偏移量为默认值  为 0
+     * 调用之后当前Activity可立刻生效
+     * @param activity
+     */
+    public static void setGrayStyle(Activity activity) {
+        Boolean isGray = EasyVariable.spCommon.getBoolean(EasyConstants.SP_GRAY_STYLE, false);
+        if (isGray) {
+            //设置灰度风格
+            Paint paint = new Paint();
+            ColorMatrix cm = new ColorMatrix();
+            cm.setSaturation(0);
+            paint.setColorFilter(new ColorMatrixColorFilter(cm));
+            activity.getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+        }
+    }
+
+    /**
+     * 取消黑白风格 -- 设置颜色矩阵的饱和度偏移量为默认值  1
+     *
+     * @param activity
+     */
+    public static void cancelGrayStyle(Activity activity) {
+        //设置灰度风格
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(1);
+        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        activity.getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
     }
 }
