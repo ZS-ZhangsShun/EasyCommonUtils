@@ -19,6 +19,7 @@ public class EasyVariable {
 	public static Context mContext;
 	public static SharedPreferences spCommon;
 	public static ThreadPoolUtil threadPoolUtil;
+	public static ThreadPoolUtil singleThreadPoolUtil;
 	public static UIHandler uiHandler;
 
 	public static void initCoreVariable(Context context, String spTag){
@@ -32,6 +33,9 @@ public class EasyVariable {
 
 		if (threadPoolUtil == null) {
 			threadPoolUtil = new ThreadPoolUtil(10);
+		}
+		if (singleThreadPoolUtil == null) {
+			singleThreadPoolUtil = new ThreadPoolUtil();
 		}
 		if (uiHandler == null) {
 			uiHandler = new UIHandler();
@@ -50,6 +54,9 @@ public class EasyVariable {
 		if (threadPoolUtil == null) {
 			threadPoolUtil = new ThreadPoolUtil(10);
 		}
+		if (singleThreadPoolUtil == null) {
+			singleThreadPoolUtil = new ThreadPoolUtil();
+		}
 		if (uiHandler == null) {
 			uiHandler = new UIHandler();
 		}
@@ -61,6 +68,9 @@ public class EasyVariable {
 		}
 		if (threadPoolUtil != null) {
 			threadPoolUtil.poolClose();
+		}
+		if (singleThreadPoolUtil != null) {
+			singleThreadPoolUtil.poolClose();
 		}
 	}
 	
