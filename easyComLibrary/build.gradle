@@ -5,7 +5,6 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
