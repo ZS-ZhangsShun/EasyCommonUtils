@@ -43,6 +43,7 @@ public class StyleUtil {
     /**
      * 设置黑白风格 取消黑白风格 -- 设置颜色矩阵的饱和度偏移量为默认值  为 0
      * 调用之后当前Activity可立刻生效
+     *
      * @param activity
      */
     public static void setGrayStyle(Activity activity) {
@@ -54,6 +55,8 @@ public class StyleUtil {
             cm.setSaturation(0);
             paint.setColorFilter(new ColorMatrixColorFilter(cm));
             activity.getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+        } else {
+            cancelGrayStyle(activity);
         }
     }
 
@@ -69,5 +72,24 @@ public class StyleUtil {
         cm.setSaturation(1);
         paint.setColorFilter(new ColorMatrixColorFilter(cm));
         activity.getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+    }
+
+    /**
+     * 设置黑白风格 取消黑白风格 -- 设置颜色矩阵的饱和度偏移量为默认值  为 0
+     * 调用之后当前Activity可立刻生效
+     *
+     * @param activity
+     */
+    public static void setGrayStyle(Activity activity, boolean isGray) {
+        if (isGray) {
+            //设置灰度风格
+            Paint paint = new Paint();
+            ColorMatrix cm = new ColorMatrix();
+            cm.setSaturation(0);
+            paint.setColorFilter(new ColorMatrixColorFilter(cm));
+            activity.getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+        } else {
+            cancelGrayStyle(activity);
+        }
     }
 }
