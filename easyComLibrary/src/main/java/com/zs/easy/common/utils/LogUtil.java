@@ -1,6 +1,7 @@
 package com.zs.easy.common.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -29,7 +30,7 @@ public class LogUtil {
     private static SimpleDateFormat logfile = new SimpleDateFormat("yyyy-MM-dd");// 日志文件格式
     private static String MYLOGFILEName = "log.txt";// 本类输出的日志文件名称
 
-    private static String defaultLogPath = getSDCardPath();// 本类输出的日志文件名称
+    private static String defaultLogPath = getDefaultPath(EasyVariable.mContext);// 本类输出的日志文件名称
     private static String defaultFileName = "EasyLog.txt";// 本类输出的日志文件名称
     /**
      * 日志超过最大长度后保留原始日志的比例
@@ -39,7 +40,7 @@ public class LogUtil {
     /**
      * 日志文件最大长度 比如 2M
      */
-    private static float maxLogLength = 2 * 1024 * 1024;
+    private static float maxLogLength = 1 * 1024 * 1024;
 
     private static boolean logable = true;
     private static int logLevel;
@@ -222,26 +223,23 @@ public class LogUtil {
      *
      * @return
      **/
-    public static void writeLogtoFile(final String tag, final String text) {// 新建或打印到日志文件
+    public static void writeLogtoDefaultFileByTime(final String tag, final String text) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
         EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
             @Override
             public void run() {
-                Log.i(tag, text);
                 Date nowtime = new Date();
                 String needWriteFiel = logfile.format(nowtime);
                 String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
                 // 取得日志存放目录
-                String path = getSDCardPath();
+                String path = defaultLogPath;
                 if (path != null && !"".equals(path)) {
                     try {
                         // 打开文件
-                        String pathName = path + File.separator + needWriteFiel + MYLOGFILEName;
-                        deleteSomeLog(pathName);
-                        File file = new File(pathName);
+                        File file = new File(path + File.separator + needWriteFiel + MYLOGFILEName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -256,91 +254,16 @@ public class LogUtil {
         });
 
     }
-
     /**
-     * 打开日志文件并写入日志 自定义文件名 默认在sd卡根目录
+     * 打开日志文件并写入日志 日志路径是默认路径 可以通过set方法设置
      *
      * @return
      **/
-    public static void writeLogtoFile(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
+    public static synchronized void writeLogtoDefaultPath(final String tag, final String text) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
-        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(tag, text);
-                Date nowtime = new Date();
-                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
-                // 取得日志存放目录
-                String path = getSDCardPath();
-                if (path != null && !"".equals(path)) {
-                    try {
-                        deleteSomeLog(path + File.separator + fileName);
-                        // 打开文件
-                        File file = new File(path + File.separator + fileName);
-                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
-                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
-                        bufWriter.write(needWriteMessage);
-                        bufWriter.newLine();
-                        bufWriter.close();
-                        filerWriter.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-    }
-
-    /**
-     * 打开日志文件并写入日志 自定义文件名 存在Android data 包名 Cache下面
-     * 如果sd卡不可用就存在 data  data  包名  Cache下面
-     *
-     * @return
-     **/
-    public static void writeLogtoCache(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
-        if (!logable) {
-            return;
-        }
-        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(tag, text);
-                Date nowtime = new Date();
-                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
-
-                // 取得日志存放目录
-                String path = getCachePath(EasyVariable.mContext);
-                if (path != null && !"".equals(path)) {
-                    try {
-                        String pathName = path + File.separator + fileName;
-                        deleteSomeLog(pathName);
-                        // 打开文件
-                        File file = new File(pathName);
-                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
-                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
-                        bufWriter.write(needWriteMessage);
-                        bufWriter.newLine();
-                        bufWriter.close();
-                        filerWriter.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-    }
-
-    /**
-     * 打开日志文件并写入日志 忽略开关必须写入
-     *
-     * @return
-     **/
-    public static synchronized void forceWriteLogtoDefaultPath(final String tag, final String text) {// 新建或打印到日志文件
         EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
             @Override
             public void run() {
@@ -368,15 +291,119 @@ public class LogUtil {
     }
 
     /**
-     * 打开日志文件并写入日志 日志路径是默认路径 可以通过set方法设置
+     * 打开日志文件并写入日志 自定义文件名 默认在sd卡根目录
      *
      * @return
      **/
-    public static synchronized void writeLogtoDefaultPath(final String tag, final String text) {// 新建或打印到日志文件
+    public static void writeLogtoDefaultFile(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
+        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
+            @Override
+            public void run() {
+                Date nowtime = new Date();
+                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
+                // 取得日志存放目录
+                String path = defaultLogPath;
+                if (path != null && !"".equals(path)) {
+                    deleteSomeLog(path + File.separator + fileName);
+                    try {
+                        // 打开文件
+                        File file = new File(path + File.separator + fileName);
+                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                        bufWriter.write(needWriteMessage);
+                        bufWriter.newLine();
+                        bufWriter.close();
+                        filerWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 打开日志文件并写入日志 自定义文件
+     *
+     * @return
+     **/
+    public static void writeLogtoFile(final String tag, final String text, final File file) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
+        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
+            @Override
+            public void run() {
+                Date nowtime = new Date();
+                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+                if (file != null && file.exists()) {
+                    deleteSomeLog(file.getAbsolutePath());
+                    try {
+                        // 打开文件
+                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                        bufWriter.write(needWriteMessage);
+                        bufWriter.newLine();
+                        bufWriter.close();
+                        filerWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+    }
+    /**
+     * 打开日志文件并写入日志 自定义文件名 存在Android data 包名 Cache下面
+     * 如果sd卡不可用就存在 data  data  包名  Cache下面
+     *
+     * @return
+     **/
+    public static void writeLogtoCache(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
+        if (!logable) {
+            return;
+        }
+        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
+            @Override
+            public void run() {
+                Date nowtime = new Date();
+                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+
+                // 取得日志存放目录
+                String path = getCachePath(EasyVariable.mContext);
+                if (path != null && !"".equals(path)) {
+                    deleteSomeLog(path + File.separator + fileName);
+                    try {
+                        // 打开文件
+                        File file = new File(path + File.separator + fileName);
+                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
+                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
+                        bufWriter.write(needWriteMessage);
+                        bufWriter.newLine();
+                        bufWriter.close();
+                        filerWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 打开日志文件并写入日志 忽略开关必须写入
+     *
+     * @return
+     **/
+    public static synchronized void forceWriteLogtoDefaultPath(final String tag, final String text) {// 新建或打印到日志文件
         EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
             @Override
             public void run() {
@@ -440,38 +467,12 @@ public class LogUtil {
         });
     }
 
-    /**
-     * 打开日志文件并写入日志 自定义文件
-     *
-     * @return
-     **/
-    public static void writeLogtoFile(final String tag, final String text, final File file) {// 新建或打印到日志文件
-        if (!logable) {
-            return;
+    public static String getDefaultPath(Context context) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            return context.getExternalFilesDir("").getAbsolutePath();
+        } else {
+            return getSDCardPath();
         }
-        EasyVariable.singleThreadPoolUtil.poolExecute(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(tag, text);
-                Date nowtime = new Date();
-                String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
-
-                if (file != null && file.exists()) {
-                    try {
-                        // 打开文件
-                        FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
-                        BufferedWriter bufWriter = new BufferedWriter(filerWriter);
-                        bufWriter.write(needWriteMessage);
-                        bufWriter.newLine();
-                        bufWriter.close();
-                        filerWriter.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
     }
 
     public static String getSDCardPath() {
@@ -525,6 +526,7 @@ public class LogUtil {
                 String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
                 if (file != null && file.exists()) {
+                    deleteSomeLog(file.getAbsolutePath());
                     try {
                         // 打开文件
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
@@ -560,13 +562,12 @@ public class LogUtil {
                 String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
                 // 取得日志存放目录
-                String path = DeviceUtil.getCachePath(EasyVariable.mContext);
+                String path = getCachePath(EasyVariable.mContext);
                 if (path != null && !"".equals(path)) {
+                    deleteSomeLog(path + File.separator + fileName);
                     try {
-                        String pathName = path + File.separator + fileName;
-                        deleteSomeLog(pathName);
                         // 打开文件
-                        File file = new File(pathName);
+                        File file = new File(path + File.separator + fileName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
@@ -587,7 +588,7 @@ public class LogUtil {
      *
      * @return
      **/
-    public static void printAndWriteLogtoFile(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
+    public static void printAndWriteLogtoDefaultFile(final String tag, final String text, final String fileName) {// 新建或打印到日志文件
         if (!logable) {
             return;
         }
@@ -599,13 +600,12 @@ public class LogUtil {
                 String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
 
                 // 取得日志存放目录
-                String path = getSDCardPath();
+                String path = defaultLogPath;
                 if (path != null && !"".equals(path)) {
+                    deleteSomeLog(path + File.separator + fileName);
                     try {
-                        String pathName = path + File.separator + fileName;
-                        deleteSomeLog(pathName);
                         // 打开文件
-                        File file = new File(pathName);
+                        File file = new File(path + File.separator + fileName);
                         FileWriter filerWriter = new FileWriter(file, true);// 后面这个参数代表是不是要接上文件中原来的数据，不进行覆盖
                         BufferedWriter bufWriter = new BufferedWriter(filerWriter);
                         bufWriter.write(needWriteMessage);
