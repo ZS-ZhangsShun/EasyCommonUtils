@@ -13,6 +13,6 @@ import android.app.AlertDialog;
  * @Date:
  */
 public interface DialogRadioInterface {
-	public void onFirstRadioListener(AlertDialog dialog);
-	public void onSecondRadioListener(AlertDialog dialog);
+	void onFirstRadioListener(AlertDialog dialog);
+	void onSecondRadioListener(AlertDialog dialog);
 }
