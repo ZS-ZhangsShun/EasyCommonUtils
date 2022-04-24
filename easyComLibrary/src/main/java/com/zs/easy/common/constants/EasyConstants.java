@@ -1,5 +1,4 @@
 package com.zs.easy.common.constants;
-
 import android.os.Environment;
 
 /**
@@ -13,6 +12,7 @@ public class EasyConstants {
      * 日志输入的tag
      */
     public static String TAG = "EasyLog";
+    public static String HTTP_TAG = "HTTP_LOG";
     public static boolean isShowToast = true;
 
     /**
@@ -23,4 +23,16 @@ public class EasyConstants {
     public static final String SP_IS_SHOW_TOAST_LOG = "SP_IS_SHOW_TOAST_LOG";
     public static final String SP_IS_SHOW_DEBUG_WINDOW = "SP_IS_SHOW_DEBUG_WINDOW";
     public static boolean IS_DEBUG = false;
+    /**
+     * 网络相关
+     */
+    public static int CONNECT_TIME_OUT = 7;
+    public static int READ_TIME_OUT = 7;
+    public static int READ_TIME_OUT_FOR_FILE = 60;
+    public static String BASE_URL = "";
+
+    /**
+     * 是否把日志写到文件里
+     */
+    public static boolean IS_WRITE_LOG_TO_FILE = true;
 }

@@ -1,6 +1,5 @@
-package com.zs.easy.imgcompress.demo;
+package com.zs.easy.imgcompress.demo.activity;
 
-import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,11 +11,21 @@ import android.view.View;
 import com.zs.easy.common.EasyCommon;
 import com.zs.easy.common.constants.EasyConstants;
 import com.zs.easy.common.constants.EasyVariable;
-import com.zs.easy.common.handler.MainUIHandler;
+import com.zs.easy.common.http.retrofit.CommonRetrofitServiceFactory;
+import com.zs.easy.common.http.retrofit.EasySubscriber;
+import com.zs.easy.common.http.retrofit.ExceptionHandle;
 import com.zs.easy.common.utils.ConfigUtil;
 import com.zs.easy.common.utils.DebugDialogUtil;
 import com.zs.easy.common.utils.DebugManager;
 import com.zs.easy.common.utils.LogUtil;
+import com.zs.easy.imgcompress.demo.R;
+import com.zs.easy.imgcompress.demo.api.dto.CategoryDTO;
+import com.zs.easy.imgcompress.demo.api.service.TestService;
+
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,14 +49,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+    /**
+     * 获取一级目录的数据
+     */
+    private void getFirCatAndChaByRxJava(String header) {
+        CommonRetrofitServiceFactory.getInstance().createService(TestService.class)
+                .getCats(header)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new EasySubscriber<List<CategoryDTO>>() {
+                    @Override
+                    public void onError(ExceptionHandle.ResponseThrowable responseThrowable) {
+                        LogUtil.i("错误码：" + responseThrowable.code);
+                        LogUtil.i("错误信息：" + responseThrowable.message);
+                        LogUtil.i("http原始json：" + responseThrowable.errorJson);
+                        LogUtil.i("其他异常信息：" + responseThrowable.errorDTO.toString());
+                    }
+
+                    @Override
+                    public void onComplete(List<CategoryDTO> firstCats) {
+                        LogUtil.i("onComplete 一级目录数量：" + firstCats.size());
+                        LogUtil.i("请求成功,当前为主线程，可以直接更新UI");
+                    }
+                });
+    }
+
+
     int i;
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (i <= 100) {
                 DebugManager.addDebugData("大量日志测试 DebugManager.addDebugData大量日志测试 DebugManager.addDebugData" + i++);
-                handler.sendEmptyMessageDelayed(0,300);
+                handler.sendEmptyMessageDelayed(0, 300);
             }
         }
     };

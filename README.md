@@ -14,6 +14,7 @@
 7、Apk文件的处理工具<br>
 8、Activity管理工具<br>
 9、异常处理工具<br>
+10、基于OKHttp+Retrofit+Rxjava+RxAndroid+FastJson的网络框架封装<br>
 12、线程通信工具<br>
 15、自定义提示框<br>
 16、自定义ImageView支持圆形展示图片<br>
@@ -33,7 +34,7 @@
 
     dependencies {
         ...
-        implementation 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.7.0'
+        implementation 'com.github.ZS-ZhangsShun:EasyCommonUtils:1.7.2'
     }
 
 
@@ -62,3 +63,61 @@
                   });
              }
       });
+
+#### 网络框架使用示例：
+
+##### 初始化 
+
+    CommonRetrofitServiceFactory.init(SERVER_UP_URL);
+
+##### 如果需要更多配置，可以按如下方法设置
+
+    CommonRetrofitServiceFactory.init(SERVER_UP_URL)
+        .connectTimeOut(5)
+        .isWriteLogToFile(false)
+        .readTimeOut(5)
+        .httpLogTag("HTTP_LOG");
+
+##### 如果需要添加拦截器 请在init之后，请求之前调用
+
+    CommonRetrofitServiceFactory.addInterceptor（xxx）
+
+##### 新建一个interface 来写对应接口
+
+     public interface TestService {
+
+        /**
+         * 请求目录的接口
+         * @param header 头文件
+         * @return 一级目录列表
+        */
+        @GET("/test-service/cats")
+        Observable<List<Category>> getCats(@Header("EasyHead") String header);
+    }
+
+##### 执行请求任务 示例
+
+    /**
+     * 获取一级目录的数据
+     */
+    private void getFirCatAndChaByRxJava(String header) {
+        CommonRetrofitServiceFactory.getInstance().createService(TestService.class)
+            .getCats(header)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new EasySubscriber<List<CategoryDTO>>() {
+                @Override
+                public void onError(ExceptionHandle.ResponseThrowable responseThrowable) {
+                    LogUtil.i("错误码：" + responseThrowable.code);
+                    LogUtil.i("错误信息：" + responseThrowable.message);
+                    LogUtil.i("http原始json：" + responseThrowable.errorJson);
+                    LogUtil.i("其他异常信息：" + responseThrowable.errorDTO.toString());
+                }
+    
+                @Override
+                public void onComplete(List<CategoryDTO> firstCats) {
+                     LogUtil.i("onComplete 一级目录数量：" + firstCats.size());
+                     LogUtil.i("请求成功,当前为主线程，可以直接更新UI");
+                }
+            });
+    }
