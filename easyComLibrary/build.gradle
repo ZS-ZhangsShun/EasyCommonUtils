@@ -12,6 +12,23 @@ android {
             minifyEnabled false
         }
     }
+    afterEvaluate {
+        publishing {
+            def versionName = "1.0"
+            publications {
+                // Creates a Maven publication called "release".
+                release(MavenPublication) {
+                    // Applies the component for the release build variant.
+//                    from components.assembleRelease
+
+                    // You can then customize attributes of the publication as shown below.
+                    groupId = 'com.easy.common'
+                    artifactId = 'library'
+                    version = versionName
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -30,4 +47,5 @@ dependencies {
     api 'com.alibaba:fastjson:1.2.58'
     //图片框架 https://github.com/bumptech/glide
     api 'com.github.bumptech.glide:glide:4.8.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.20"
 }
