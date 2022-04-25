@@ -1,8 +1,10 @@
 package com.zs.easy.common.utils;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.zs.easy.common.constants.EasyConstants;
@@ -254,6 +256,7 @@ public class LogUtil {
         });
 
     }
+
     /**
      * 打开日志文件并写入日志 日志路径是默认路径 可以通过set方法设置
      *
@@ -360,6 +363,7 @@ public class LogUtil {
         });
 
     }
+
     /**
      * 打开日志文件并写入日志 自定义文件名 存在Android data 包名 Cache下面
      * 如果sd卡不可用就存在 data  data  包名  Cache下面
@@ -469,7 +473,15 @@ public class LogUtil {
 
     public static String getDefaultPath(Context context) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            return context.getExternalFilesDir("").getAbsolutePath();
+            String logDefaultSavePath = "";
+            //有sd卡权限则写到默认的外部存储 否则写到内部存储
+            if (ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
+                logDefaultSavePath = context.getCacheDir().getAbsolutePath();
+            } else {
+                logDefaultSavePath = context.getExternalFilesDir("").getAbsolutePath();
+            }
+            Log.i("EasyLog", "log logDefaultSavePath ----------- > " + logDefaultSavePath + " < -----------");
+            return logDefaultSavePath;
         } else {
             return getSDCardPath();
         }
