@@ -472,19 +472,19 @@ public class LogUtil {
     }
 
     public static String getDefaultPath(Context context) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            String logDefaultSavePath = "";
-            //有sd卡权限则写到默认的外部存储 否则写到内部存储
-            if (ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
-                logDefaultSavePath = context.getCacheDir().getAbsolutePath();
-            } else {
-                logDefaultSavePath = context.getExternalFilesDir("").getAbsolutePath();
-            }
-            Log.i("EasyLog", "log logDefaultSavePath ----------- > " + logDefaultSavePath + " < -----------");
-            return logDefaultSavePath;
+        String logDefaultSavePath = "";
+        //有sd卡权限则写到默认的外部存储 否则写到内部存储
+        if (ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
+            logDefaultSavePath = context.getCacheDir().getAbsolutePath();
         } else {
-            return getSDCardPath();
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                logDefaultSavePath = context.getExternalFilesDir("").getAbsolutePath();
+            } else {
+                logDefaultSavePath = getSDCardPath();
+            }
         }
+        Log.i("EasyLog", "log logDefaultSavePath ----------- > " + logDefaultSavePath + " < -----------");
+        return logDefaultSavePath;
     }
 
     public static String getSDCardPath() {
